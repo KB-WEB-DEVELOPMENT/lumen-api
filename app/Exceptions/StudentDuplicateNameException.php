@@ -10,6 +10,6 @@ class StudentDuplicateNameException extends Exception
     {
         $arr = [];
 		
-		return $arr;
+	return $arr;
     }
 }
