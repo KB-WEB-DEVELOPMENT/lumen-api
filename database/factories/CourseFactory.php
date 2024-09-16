@@ -25,11 +25,11 @@ class CourseFactory extends Factory
     public function definition(): array
     {
         return [
-			'title' => fake()->words(5,true),
-			'topic'  =>  fake()->randomElement(['PHP','C++','Java']),
-            'start_date' => fake()->iso8601(),
-			'total_number_hours'  => fake()->numberBetween(50,100),
-			'instructor_id' => Instructor::factory(),
+	   'title' => fake()->words(5,true),
+	   'topic'  =>  fake()->randomElement(['PHP','C++','Java']),
+           'start_date' => fake()->iso8601(),
+	   'total_number_hours'  => fake()->numberBetween(50,100),
+	   'instructor_id' => Instructor::factory(),
         ];
     }
 }
