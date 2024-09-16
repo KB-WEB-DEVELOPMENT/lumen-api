@@ -20,16 +20,16 @@ class HandlerTest extends TestCase
         
         $subject->shouldNotReceive('isDebugMode');
 		
-		$request =  $app()->bind(
-							\Illuminate\Http\Request::class,
-							function () {
-								$mock = m::mock(\Illuminate\Http\Request::class)->makePartial();
-								$mock->shouldReceive('wantsJson')
-									 ->andReturn(false);	
+	$request =  $app()->bind(
+			\Illuminate\Http\Request::class,
+			function () {
+			    $mock = m::mock(\Illuminate\Http\Request::class)->makePartial();
+			    $mock->shouldReceive('wantsJson')
+				  ->andReturn(false);	
 								
-								return $mock;
-							}
-					);
+			    return $mock;
+		        }
+		    );
 
         $exception = m::mock(\Exception::class, ['Error!']);
         
@@ -48,16 +48,16 @@ class HandlerTest extends TestCase
 
         $subject->shouldReceive('isDebugMode')->andReturn(false);
 		
-		$request =  $app()->bind(
-							\Illuminate\Http\Request::class,
-							function () {
-								$mock = m::mock(\Illuminate\Http\Request::class)->makePartial();
-								$mock->shouldReceive('wantsJson')
-									 ->andReturn(true);	
+	$request =  $app()->bind(
+			 \Illuminate\Http\Request::class,
+			 function () {
+				$mock = m::mock(\Illuminate\Http\Request::class)->makePartial();
+				$mock->shouldReceive('wantsJson')
+				     ->andReturn(true);	
 								
-								return $mock;
-							}
-					);
+				return $mock;
+			  }
+		    );
 					
         $exception = m::mock(\Exception::class,['The exception error messsage attribute content.']);
 
@@ -70,11 +70,11 @@ class HandlerTest extends TestCase
 
         $this->assertInstanceOf(JsonResponse::class,$result);
         
-		$this->assertObjectHasAttribute('error',$data);
+	$this->assertObjectHasAttribute('error',$data);
         
-		$this->assertAttributeEquals('The exception error messsage attribute content.','message',$data->error);
+	$this->assertAttributeEquals('The exception error messsage attribute content.','message',$data->error);
         
-		$this->assertAttributeEquals(400,'status',$data->error);
+	$this->assertAttributeEquals(400,'status',$data->error);
     }
 
     public function it_provides_json_responses_for_http_exceptions()
@@ -84,16 +84,16 @@ class HandlerTest extends TestCase
         $subject->shouldReceive('isDebugMode')
                 ->andReturn(false);
 				
-		$request =  $app()->bind(
-							\Illuminate\Http\Request::class,
-							function () {
-								$mock = m::mock(\Illuminate\Http\Request::class)->makePartial();
-								$mock->shouldReceive('wantsJson')
-									 ->andReturn(true);	
+	$request =  $app()->bind(
+			  \Illuminate\Http\Request::class,
+			  function () {
+				$mock = m::mock(\Illuminate\Http\Request::class)->makePartial();
+				$mock->shouldReceive('wantsJson')
+				     ->andReturn(true);	
 								
-								return $mock;
-							}
-					);
+				return $mock;
+			   }
+		    );
 
         $examples = [
             [
@@ -117,19 +117,19 @@ class HandlerTest extends TestCase
             
             $exception = m::mock($e['mock']);
         
-			$exception->shouldReceive('getMessage')->andReturn(null);
+	    $exception->shouldReceive('getMessage')->andReturn(null);
             
-			$exception->shouldReceive('getStatusCode')->andReturn($e['status']);
+	    $exception->shouldReceive('getStatusCode')->andReturn($e['status']);
 
             $result = $subject->render($request,$exception);
             
-			$data = $result->getData();
+	    $data = $result->getData();
 
             $this->assertEquals($e['status'],$result->getStatusCode());
             
-			$this->assertEquals($e['message'],$data->error->message);
+	    $this->assertEquals($e['message'],$data->error->message);
             
-			$this->assertEquals($e['status'],$data->error->status);
+	    $this->assertEquals($e['status'],$data->error->status);
         }
     }
 }
