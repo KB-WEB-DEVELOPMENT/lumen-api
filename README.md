@@ -53,6 +53,9 @@ The API can access resources which relate to (1)  instructors, (2) students, (3)
 
 #### [3. Database Schema](#database-schema)
 
+![Lumen API DB schema](https://github.com/KB-WEB-DEVELOPMENT/lumen-api/blob/main/lumen-api-db-schema.png)
+
+
 #### [4. Installation](#installation)
 
 ##### 1. Clone the repository
