@@ -12,16 +12,16 @@ return new class extends Migration
      * @return void
      */
 	
-	public function up(): void
+    public function up(): void
     {
-		Schema::create('courses_ratings', function (Blueprint $table) {
-            $table->increments('id');
-			$table->integer('rating');
-			$table->foreignId('course_id')->constrained(table:'courses')->onUpdate('cascade')->onDelete('cascade');
-			$table->foreignId('student_id')->constrained(table:'students')->onUpdate('cascade')->onDelete('cascade');
-			$table->unique('course_id','student_id');
-            $table->timestamps();
-        });
+	 Schema::create('courses_ratings', function (Blueprint $table) {
+                $table->increments('id');
+		$table->integer('rating');
+		$table->foreignId('course_id')->constrained(table:'courses')->onUpdate('cascade')->onDelete('cascade');
+		$table->foreignId('student_id')->constrained(table:'students')->onUpdate('cascade')->onDelete('cascade');
+		$table->unique('course_id','student_id');
+                $table->timestamps();
+         });
     }
 
     /**
