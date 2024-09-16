@@ -10,6 +10,6 @@ class StudentWithUserIdAlreadyExistsException extends Exception
     {
         $arr = [];
 		
-		return $arr;
+	return $arr;
     }
 }
