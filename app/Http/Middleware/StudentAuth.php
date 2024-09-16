@@ -24,13 +24,13 @@ class StudentAuth
             return response('Unauthorized.', 401);
         }
 		
-		$user = $this->auth;
-		$user_id = $user::id();
+	$user = $this->auth;
+	$user_id = $user::id();
 		
-		throw_if(
-			!Student::where('user_id',$user_id)->exists(),
-			 StudentReservedAccessOnlyException::class
-		);
+	throw_if(
+	   !Student::where('user_id',$user_id)->exists(),
+	   StudentReservedAccessOnlyException::class
+        );
 
         return $next($request);
     }
