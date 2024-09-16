@@ -23,10 +23,10 @@ class CourseRatingFactory extends Factory
     */ 
     public function definition(): array
     {
-		return [
+	  return [
             'rating' => fake()->numberBetween(2,5),
-			'course_id' => Course::factory(),
-			'student_id' => Student::factory(),
-        ];
+	    'course_id' => Course::factory(),
+	    'student_id' => Student::factory(),
+          ];
     }
 }
