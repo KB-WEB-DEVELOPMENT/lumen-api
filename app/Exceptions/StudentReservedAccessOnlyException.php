@@ -4,7 +4,7 @@ namespace App\Exceptions;
  
 use Exception;
  
-class CannotCreateTwoInstructorsSameUserIdException extends Exception
+class StudentReservedAccessOnlyException extends Exception
 {
     public function context(): array
     {
