@@ -32,156 +32,152 @@ class UserControllerTest extends TestCase
 	
     public function can_create_own_instructor(): void
     {					
-		DB::table('instructors')->truncate();
+        DB::table('instructors')->truncate();
 		
-		$count1 = DB::table('instructors')->count();
+	$count1 = DB::table('instructors')->count();
 		
-		$this->assertSame(0,$count1);
+	$this->assertSame(0,$count1);
 		
-		$user = User::factory()->create();
+	$user = User::factory()->create();
 													
-		$this->actingAs($user)->call('POST', 'api/v1/instructors/create');
+	$this->actingAs($user)->call('POST', 'api/v1/instructors/create');
 		
-		$count2 = DB::table('instructors')->count();
+	$count2 = DB::table('instructors')->count();
 		
-		$this->assertSame(1,$count2);
-            					
+	$this->assertSame(1,$count2);    					
     }
 
     public function can_create_own_student(): void
     {		
-		DB::table('students')->truncate();
+       DB::table('students')->truncate();
 		
-		$count1 = DB::table('students')->count();
+       $count1 = DB::table('students')->count();
 		
-		$this->assertSame(0,$count1);
+       $this->assertSame(0,$count1);
 		
-		$user = User::factory()->create();
+       $user = User::factory()->create();
 													
-		$this->actingAs($user)->call('POST', 'api/v1/students/create');
+       $this->actingAs($user)->call('POST', 'api/v1/students/create');
 		
-		$count2 = DB::table('students')->count();
+       $count2 = DB::table('students')->count();
 		
-		$this->assertSame(1,$count2);
+       $this->assertSame(1,$count2);
     }
 	
-	public function fails_new_instructor_existing_instructor_user_id(): void
+    public function fails_new_instructor_existing_instructor_user_id(): void
     {			
-		Exceptions::fake();
+	Exceptions::fake();
 		
-		DB::table('instructors')->truncate();
+	DB::table('instructors')->truncate();
 		
-		$count1 = DB::table('instructors')->count();
+	$count1 = DB::table('instructors')->count();
 		
-		$this->assertSame(0,$count1);
+	$this->assertSame(0,$count1);
 		
-		$user = User::factory()->create();
+	$user = User::factory()->create();
 													
-		$this->actingAs($user)->call('POST', 'api/v1/instructors/create');
+	$this->actingAs($user)->call('POST', 'api/v1/instructors/create');
 		
-		$count2 = DB::table('instructors')->count();
+	$count2 = DB::table('instructors')->count();
 		
-		$this->assertSame(1,$count2);
+	$this->assertSame(1,$count2);
 		
-		$this->actingAs($user)->call('POST', 'api/v1/instructors/create');
+	$this->actingAs($user)->call('POST', 'api/v1/instructors/create');
  
         Exceptions::assertReported(CannotCreateTwoInstructorsSameUserIdException::class);
-	}
+     }
 	
-	public function fails_new_student_existing_student_user_id(): void
-    {	
-		Exceptions::fake();
+     public function fails_new_student_existing_student_user_id(): void
+     {	
+        Exceptions::fake();
 		
-		DB::table('students')->truncate();
+	DB::table('students')->truncate();
 		
-		$count1 = DB::table('students')->count();
+	$count1 = DB::table('students')->count();
 		
-		$this->assertSame(0,$count1);
+	$this->assertSame(0,$count1);
 		
-		$user = User::factory()->create();
+	$user = User::factory()->create();
 													
-		$this->actingAs($user)->call('POST', 'api/v1/students/create');
+	$this->actingAs($user)->call('POST', 'api/v1/students/create');
 		
-		$count2 = DB::table('students')->count();
+	$count2 = DB::table('students')->count();
 		
-		$this->assertSame(1,$count2);
+	$this->assertSame(1,$count2);
 		
-		$this->actingAs($user)->call('POST', 'api/v1/students/create');
+	$this->actingAs($user)->call('POST', 'api/v1/students/create');
  
         Exceptions::assertReported(CannotCreateTwoStudentsSameUserIdException::class);
+      }
 	
-	}
-	
-	public function fails_new_instructor_existing_student_user_id(): void
-    {	
-		Exceptions::fake();
+      public function fails_new_instructor_existing_student_user_id(): void
+      {	
+	Exceptions::fake();
 		
-		$user = User::factory()->create();
+	$user = User::factory()->create();
 				
-		$student = Student::factory()->create(['user_id' => $user->id ]);
+	$student = Student::factory()->create(['user_id' => $user->id ]);
 															
-		$this->actingAs($user)->call('POST', 'api/v1/instructors/create');
+	$this->actingAs($user)->call('POST', 'api/v1/instructors/create');
  
         Exceptions::assertReported(StudentWithUserIdAlreadyExistsException::class);
-	}
+      }
 	
-	public function fails_new_student_existing_instructor_user_id(): void
-    {	
-		Exceptions::fake();
+      public function fails_new_student_existing_instructor_user_id(): void
+      { 	
+         Exceptions::fake();
  
-        $user = User::factory()->create();
+         $user = User::factory()->create();
 				
-		$instructor = Instructor::factory()->create(['user_id' => $user->id ]);
+	 $instructor = Instructor::factory()->create(['user_id' => $user->id ]);
 															
-		$this->actingAs($user)->call('POST', 'api/v1/students/create');
+	 $this->actingAs($user)->call('POST', 'api/v1/students/create');
  
-        Exceptions::assertReported(InstructorWithUserIdAlreadyExistsException::class);
-	
-	}	
+         Exceptions::assertReported(InstructorWithUserIdAlreadyExistsException::class);
+       }	
 
-	public function fails_duplicate_instructors_names(): void
-    {	
-		Exceptions::fake();
+       public function fails_duplicate_instructors_names(): void
+       {	
+	  Exceptions::fake();
  
-        $user1 = User::factory()->create();
+          $user1 = User::factory()->create();
 		
-		$user2 = User::factory()->create();
+	  $user2 = User::factory()->create();
 		
-		$instructor1 = Instructor::factory()->create([
+	  $instructor1 = Instructor::factory()->create([
 			'firstname' =>  'Aaaaaaa',
 			'lastname ' =>  'Bbbbbbb',
 			'user_id' => $user1->id,
-		]);
+	  ]);
 		
-		$this->actingAs($user2)->call('POST', 'api/v1/instructors/create',[
-										'firstname' =>  'Aaaaaaa',
-										'lastname ' =>  'Bbbbbbb',
-										'user_id' => $user2->id, 
-								]);
+	  $this->actingAs($user2)->call('POST', 'api/v1/instructors/create',[
+					   'firstname' =>  'Aaaaaaa',
+					   'lastname ' =>  'Bbbbbbb',
+					   'user_id' => $user2->id, 
+			               ]);
 								
-        Exceptions::assertReported(InstructorDuplicateNameException::class);
+          Exceptions::assertReported(InstructorDuplicateNameException::class);
 	
 	}	
 
 	public function fails_duplicate_students_names(): void
-    {	
-        $user1 = User::factory()->create();
+        {	
+            $user1 = User::factory()->create();
 		
-		$user2 = User::factory()->create();
+	    $user2 = User::factory()->create();
 		
-		$student1 = Student::factory()->create([
+	    $student1 = Student::factory()->create([
 			'firstname' =>  'Aaaaaaa',
 			'lastname ' =>  'Bbbbbbb',
 			'user_id' => $user1->id,
-		]);
+	    ]);
 		
-		$this->actingAs($user2)->call('POST', 'api/v1/students/create',[
-										'firstname' =>  'Aaaaaaa',
-										'lastname ' =>  'Bbbbbbb',
-										'user_id' => $user2->id, 
-								]);
+	    $this->actingAs($user2)->call('POST', 'api/v1/students/create',[
+				                'firstname' =>  'Aaaaaaa',
+						'lastname ' =>  'Bbbbbbb',
+ 					        'user_id' => $user2->id, 
+	    ]);
  
-        Exceptions::assertReported(StudentDuplicateNameException::class);
-	
+            Exceptions::assertReported(StudentDuplicateNameException::class);
 	}
 }	
