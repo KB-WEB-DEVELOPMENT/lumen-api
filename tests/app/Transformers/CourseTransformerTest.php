@@ -42,12 +42,12 @@ class CourseTransformerTest extends TestCase
         
         $this->assertArrayHasKey('start_date',$transformerArray);
 		
-		$this->assertArrayHasKey('total_number_hours',$transformerArray);
+	$this->assertArrayHasKey('total_number_hours',$transformerArray);
 		
-		$this->assertArrayHasKey('instructor_name',$transformerArray);
+	$this->assertArrayHasKey('instructor_name',$transformerArray);
 		
-		$this->assertArrayHasKey('created',$transformerArray);
+	$this->assertArrayHasKey('created',$transformerArray);
 		
-		$this->assertArrayHasKey('updated',$transformerArray);
+	$this->assertArrayHasKey('updated',$transformerArray);
     }
 }
