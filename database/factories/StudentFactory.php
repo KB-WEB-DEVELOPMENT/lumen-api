@@ -9,24 +9,26 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class StudentFactory extends Factory
 {
-	/**
+   /**
     * The name of the factory's corresponding model.
     *
     * @var class-string<\Illuminate\Database\Eloquent\Model>
     */
-	protected $model = Student::class;
+
+    protected $model = Student::class;
  
     /**
     * Define the model's default state.
     *
     * @return array<string, mixed>
-    */ 
+    */
+	
     public function definition(): array
     {
         return [
             'firstname' => fake()->name(),
             'lastname'  => fake()->name(),
-			'user_id' => User::factory(),
+	    'user_id' => User::factory(),
         ];
     }
 }
