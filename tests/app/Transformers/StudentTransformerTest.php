@@ -42,6 +42,6 @@ class StudentTransformerTest extends TestCase
         
         $this->assertArrayHasKey('created',$transformerArray);
 		
-		$this->assertArrayHasKey('updated',$transformerArray);
+	$this->assertArrayHasKey('updated',$transformerArray);
     }
 }
