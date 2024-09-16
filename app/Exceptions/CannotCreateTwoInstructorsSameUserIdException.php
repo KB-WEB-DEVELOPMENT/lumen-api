@@ -10,6 +10,6 @@ class CannotCreateTwoInstructorsSameUserIdException extends Exception
     {
         $arr = [];
 		
-		return $arr;
+	return $arr;
     }
 }
