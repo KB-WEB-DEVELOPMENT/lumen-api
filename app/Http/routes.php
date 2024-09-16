@@ -18,6 +18,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\StudentController;
 
+use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\InstructorAuth;
 use App\Http\Middleware\StudentAuth;
 
