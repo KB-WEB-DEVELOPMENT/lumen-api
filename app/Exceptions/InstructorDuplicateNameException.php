@@ -10,6 +10,6 @@ class InstructorDuplicateNameException extends Exception
     {
         $arr = [];
 		
-		return $arr;
+	return $arr;
     }
 }
