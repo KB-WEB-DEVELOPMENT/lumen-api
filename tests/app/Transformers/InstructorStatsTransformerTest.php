@@ -34,20 +34,19 @@ class InstructorStatsTransformerTest extends TestCase
 
     public function can_transform__instructorStats_construct(): void
     {
-
         $instructor = Instructor::factory()->create();
 		
-		$student = Student::factory()->create();
+	$student = Student::factory()->create();
 		
-		$course = Course::factory()->create([
+	$course = Course::factory()->create([
 			'instructor_id' => $instructor->id,
-		]);
+	]);
 		
-		$courseRating = CourseRating::factory()->create([
-			'rating' => rand(2,5),
-			'course_id' => $course->id, 
-			'student_id' => $student->id 
-		]);
+	$courseRating = CourseRating::factory()->create([
+			  'rating' => rand(2,5),
+			  'course_id' => $course->id, 
+			  'student_id' => $student->id 
+	]);
 						
         $transformer = new InstructorStatsTransformer();
 
@@ -61,8 +60,8 @@ class InstructorStatsTransformerTest extends TestCase
         
         $this->assertArrayHasKey('average_stars_rating',$transformerArray);
 		
-		$this->assertArrayHasKey('average_percent_rating',$transformerArray);
+	$this->assertArrayHasKey('average_percent_rating',$transformerArray);
 		
-		$this->assertArrayHasKey('students_votes',$transformerArray);
+	$this->assertArrayHasKey('students_votes',$transformerArray);
     }
 }
