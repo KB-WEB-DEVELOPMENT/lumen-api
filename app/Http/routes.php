@@ -126,5 +126,5 @@ $router->group(['prefix' => 'api/v1','middleware' => 'student'],
 $router->group(['prefix' => 'api/v1','middleware' => 'student'],
 	       ['uses'  => 'StudentController@createCourseRating'],
 	       function () use ($router) {
-	         $router->post('students/courses/{courseId:[0-9]+}/rating/create', function () {});
+	         $router->post('students/courses/{courseId:[0-9]+}/rating/create', function ($courseId) {});
 	       });
