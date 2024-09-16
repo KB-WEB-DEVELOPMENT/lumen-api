@@ -24,13 +24,13 @@ class InstructorAuth
             return response('Unauthorized.', 401);
         }
 		
-		$user = $this->auth;
-		$user_id = $user::id();
+	$user = $this->auth;
+	$user_id = $user::id();
 		
-		throw_if(
-			!Instructor::where('user_id',$user_id)->exists(),
-			 InstructorReservedAccessOnlyException::class
-		);
+	throw_if(
+	   !Instructor::where('user_id',$user_id)->exists(),
+	   InstructorReservedAccessOnlyException::class
+        );
 		
         return $next($request);
     }
