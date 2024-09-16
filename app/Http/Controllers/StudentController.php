@@ -20,72 +20,71 @@ class StudentController extends Controller
     }
 
      public function updateProfile(Request $request)
-    {
+     {
         $this->validateProfile($request);
 		 
-		$user_id = Auth::id();
+	$user_id = Auth::id();
 		
-		$student = Student::where('user_id',$user_id)->firstOrFail();
+	$student = Student::where('user_id',$user_id)->firstOrFail();
 						
-		$student->fill($request->all());
+	$student->fill($request->all());
  
-		$student->save();
+	$student->save();
  
-		$data = $this->item($student, new StudentTransformer());
+	$data = $this->item($student, new StudentTransformer());
  		
-		return response()->json($data,200);
+	return response()->json($data,200);
     }
 	
-	 public function deleteProfile()
+    public function deleteProfile()
     {
         $user_id = Auth::id();
 		
-		$student = Student::where('user_id',$user_id)->firstOrFail();
+	$student = Student::where('user_id',$user_id)->firstOrFail();
 		
-		$student->delete();
+	$student->delete();
 		
-		return response(null, 204);
+	return response(null, 204);
     }
 	
-	public function createCourseRating(Request $request, int $courseId)
+    public function createCourseRating(Request $request, int $courseId)
     {
         $this->validateCourseRating($request);
 		
-		$user_id = Auth::id();
+	$user_id = Auth::id();
 		
-		$student = Student::where('user_id',$user_id)->firstOrFail();
+	$student = Student::where('user_id',$user_id)->firstOrFail();
 		
-		$course = Course::where('id',$courseId)->firstOrFail();
+	$course = Course::where('id',$courseId)->firstOrFail();
 		
-		$courseRating = CourseRating::create([
-							'rating' => $request->input('rating'),
-							'course_id' => $course->id,
-							'student_id' => $student->id,
-		]);
+	$courseRating = CourseRating::create([
+			  'rating' => $request->input('rating'),
+			  'course_id' => $course->id,
+			  'student_id' => $student->id,
+	]);
 		
-		$instructor = $course->instructor;
+	$instructor = $course->instructor;
 		
         $data = $this->item(Instructor::findOrFail($instructor->id), new InstructorStatsTransformer());
 
-		return response()->json($data, 201, [
-			'Location' => route('instructorStats.show', ['instructorId' => $instructor->id])
-		]);		
+	return response()->json($data, 201, [
+	    'Location' => route('instructorStats.show', ['instructorId' => $instructor->id])
+	]);		
     
-	}
+     }
 	
-	private function validateProfile(Request $request)
-	{
+     private function validateProfile(Request $request)
+     {
         $this->validate($request, [
-
-			'firstname' => 'required|string|min:1|max:50',
-			'lastname' =>  'required|string|min:1|max:50',
+		  'firstname' => 'required|string|min:1|max:50',
+		  'lastname' =>  'required|string|min:1|max:50',
         ]); 		
-	}
+     }
 	
-	private function validateCourseRating(Request $request)
-	{
+     private function validateCourseRating(Request $request)
+     {
         $this->validate($request, [
-			'rating' => 'required|integer|between:1,5',
+		   'rating' => 'required|integer|between:1,5',
         ]);  	  	  
-	}
+     }
 }
