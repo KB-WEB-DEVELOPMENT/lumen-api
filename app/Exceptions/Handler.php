@@ -53,21 +53,24 @@ class Handler extends ExceptionHandler
             ];
 
             if ($e instanceof HttpException) {
+            
                 $response['message'] = Response::$statusTexts[$e->getStatusCode()];
+            
                 $response['status'] = $e->getStatusCode();
-            } else if ($e instanceof ModelNotFoundException) {
-                $response['message'] = Response::$statusTexts[Response::HTTP_NOT_FOUND];
-                $response['status'] = Response::HTTP_NOT_FOUND;
-            }
+        
+                } else if ($e instanceof ModelNotFoundException) {
+                    $response['message'] = Response::$statusTexts[Response::HTTP_NOT_FOUND];
+                    $response['status'] = Response::HTTP_NOT_FOUND;
+                }
 
-            if ($this->isDebugMode()) {
-                $response['debug'] = [
-                    'exception' => get_class($e),
-                    'trace' => $e->getTrace()
-                ];
-            }
+                if ($this->isDebugMode()) {
+                    $response['debug'] = [
+                        'exception' => get_class($e),
+                        'trace' => $e->getTrace()
+                    ];
+                }
 
-            return response()->json(['error' => $response], $response['status']);
+                return response()->json(['error' => $response], $response['status']);
         }
 
         return parent::render($request, $e);
