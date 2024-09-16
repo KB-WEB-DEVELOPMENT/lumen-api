@@ -10,6 +10,6 @@ class CannotCreateTwoStudentsSameUserIdException extends Exception
     {
         $arr = [];
 		
-		return $arr;
+	return $arr;
     }
 }
