@@ -10,6 +10,6 @@ class StudentReservedAccessOnlyException extends Exception
     {
         $arr = [];
 		
-		return $arr;
+	return $arr;
     }
 }
