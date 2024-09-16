@@ -13,7 +13,6 @@ class Controller extends BaseController
      */
     private $fractal;
 
-    # C:\xampp\htdocs\paulredmond-apress-bookr-c5989e925cae\app\Http\Response\FractalResponse.php
     public function __construct(FractalResponse $fractal)
     {
         $this->fractal = $fractal;
