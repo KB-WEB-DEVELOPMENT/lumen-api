@@ -7,22 +7,23 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CourseRating extends Model
 {    
-	protected $table = 'courses_ratings';
-	/**
+     protected $table = 'courses_ratings';
+    
+     /**
      * The attributes that are mass assignable
      *
      * @var array
      */
 	 
-    protected $fillable = ['rating','course_id','student_id'];
+     protected $fillable = ['rating','course_id','student_id'];
 	
-	public function course(): BelongsTo
-    {
+     public function course(): BelongsTo
+     {
         return $this->belongsTo(Course::class,'id');
-    }	
+     }	
 
-    public function student(): BelongsTo 
-    {
+     public function student(): BelongsTo 
+     {
         return $this->belongsTo(Student::class,'id');
-    }		
+     }		
 }
