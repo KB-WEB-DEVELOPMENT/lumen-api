@@ -18,7 +18,7 @@ class InstructorTransformer extends TransformerAbstract
         return [
             'id' => $instructor->id,
             'title' => $instructor->title,
-			'firstname' => ucfirst(strtolower(trim($instructor->firstname))),
+	     'firstname' => ucfirst(strtolower(trim($instructor->firstname))),
             'lastname' =>  ucfirst(strtolower(trim($instructor->lastname))),
             'created' => $instructor->created_at,
             'updated' => $instructor->updated_at
