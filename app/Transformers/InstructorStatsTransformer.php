@@ -36,7 +36,7 @@ class InstructorStatsTransformer extends TransformerAbstract
 	$average_percent_rating = $num_students_votes == 0 ? 'unavailable' : round(20*$average_stars_rating);  
  		
 	return [
-	    'name' => $course->instructor->title . ' ' .  ucfirst(strtolower($course->instructor->lastname)),
+	    'name' => $instructor->title . ' ' .  ucfirst(strtolower($instructor->lastname)),
 	    'registered_courses' => $registered_courses_num,
 	    'average_stars_rating' => ($average_stars_rating == 'unavailable') ? 'unavailable' : $average_stars_rating . '/5', 
             'average_percent_rating' => ($average_percent_rating == 'unavailable') ? 'unavailable' :  $average_percent_rating . '%',
