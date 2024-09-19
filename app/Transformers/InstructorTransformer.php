@@ -20,8 +20,8 @@ class InstructorTransformer extends TransformerAbstract
             'title' => $instructor->title,
 	     'firstname' => ucfirst(strtolower(trim($instructor->firstname))),
             'lastname' =>  ucfirst(strtolower(trim($instructor->lastname))),
-            'created' => $instructor->created_at,
-            'updated' => $instructor->updated_at
+            'created' => date('c',$instructor->created_at),
+            'updated' => date('c',$instructor->updated_at)
         ];
     }
 }
