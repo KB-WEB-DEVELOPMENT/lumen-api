@@ -63,5 +63,9 @@ class InstructorStatsTransformerTest extends TestCase
 	$this->assertArrayHasKey('average_percent_rating',$transformerArray);
 		
 	$this->assertArrayHasKey('students_votes',$transformerArray);
+
+	$this->assertArrayHasKey('created',$transformerArray);
+		
+	$this->assertArrayHasKey('updated',$transformerArray);
     }
 }
