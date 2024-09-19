@@ -41,6 +41,8 @@ class InstructorStatsTransformer extends TransformerAbstract
 	    'average_stars_rating' => ($average_stars_rating == 'unavailable') ? 'unavailable' : $average_stars_rating . '/5', 
             'average_percent_rating' => ($average_percent_rating == 'unavailable') ? 'unavailable' :  $average_percent_rating . '%',
 	    'students_votes' => $num_students_votes,
+	    'created' => date('c',$instructor->created_at),
+	    'updated' => date('c',$instructor->updated_at) 	
         ];
     }
 }
