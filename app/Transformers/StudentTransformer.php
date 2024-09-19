@@ -19,8 +19,8 @@ class StudentTransformer extends TransformerAbstract
             'id' => $student->id,
             'firstname' => ucfirst(strtolower(trim($student->firstname))),
             'lastname' =>  ucfirst(strtolower(trim($student->lastname))),
-            'created' => $student->created_at,
-            'updated' => $student->updated_at
+            'created' => date('c',$student->created_at),
+            'updated' => date('c',$student->updated_at)
         ];
     }
 }
