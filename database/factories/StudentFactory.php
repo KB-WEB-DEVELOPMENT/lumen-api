@@ -28,7 +28,7 @@ class StudentFactory extends Factory
         return [
             'firstname' => fake()->name(),
             'lastname'  => fake()->name(),
-	    'user_id' => User::factory(),
+	    	'user_id' => User::factory(),
         ];
     }
 }
