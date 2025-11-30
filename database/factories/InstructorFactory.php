@@ -27,24 +27,24 @@ class InstructorFactory extends Factory
     public function definition(): array
     {
         return [
-	   'title' =>  fake()->randomElement([
-				'Associate Professor',
-				'Teaching assistant',
-				'Professor',
-				'Adjunct professor',
-				'Instructor',
-				'Clinical professor',
-				'Distinguished Professor',
-				'Professor Emeritus',
-				'Professor of Practice',
-				'Research associate',
-				'Tenure track',
-				'Lecturer',
-				'Visiting Assistant Professor'
+	   		'title' =>  fake()->randomElement([
+									'Associate Professor',
+									'Teaching assistant',
+									'Professor',
+									'Adjunct professor',
+									'Instructor',
+									'Clinical professor',
+									'Distinguished Professor',
+									'Professor Emeritus',
+									'Professor of Practice',
+									'Research associate',
+									'Tenure track',
+									'Lecturer',
+									'Visiting Assistant Professor'
 			 ]),
             'firstname' => fake()->name(),
             'lastname'  => fake()->name(),
-	    'user_id'   => User::factory(),
+	    	'user_id'   => User::factory(),
         ];
     }
 }
