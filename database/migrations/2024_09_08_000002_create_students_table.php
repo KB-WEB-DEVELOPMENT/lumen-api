@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-	Schema::create('students', function (Blueprint $table) {
-            $table->increments('id');
-	    $table->string('firstname',length:50);
-	    $table->string('lastname',length:50);
-	    $table->foreignId('user_id')->constrained(table: 'users')->onUpdate('cascade')->onDelete('cascade');
-	    $table->unique('firstname','lastname');
-	    $table->unique('user_id');
-            $table->timestamps();
+		Schema::create('students', function (Blueprint $table) {
+            	$table->increments('id');
+			    $table->string('firstname',length:50);
+			    $table->string('lastname',length:50);
+			    $table->foreignId('user_id')->constrained(table: 'users')->onUpdate('cascade')->onDelete('cascade');
+			    $table->unique('firstname','lastname');
+			    $table->unique('user_id');
+            	$table->timestamps();
         });
     }
 
@@ -34,3 +34,4 @@ return new class extends Migration
         Schema::dropIfExists('students');
     }
 }
+
