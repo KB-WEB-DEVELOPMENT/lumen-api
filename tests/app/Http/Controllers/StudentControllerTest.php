@@ -43,44 +43,44 @@ class StudentControllerTest extends TestCase
 
     public function can_delete_self_student(): void
     {					
-	DB::table('students')->truncate();
+		DB::table('students')->truncate();
 		
-	$count1 = DB::table('students')->count();
+		$count1 = DB::table('students')->count();
 		
-	$this->assertSame(0,$count1); 
+		$this->assertSame(0,$count1); 
 		
-	$user = User::factory()->create();
-		
-	$student = Student::factory()->create(['user_id' => $user->id ]);
-		
-	$count2 = DB::table('students')->count();
-		
-	$this->assertSame(1,$count2);
-		
-	$this->actingAs($user)->json('DELETE', 'api/v1/students/delete');       				
+		$user = User::factory()->create();
+			
+		$student = Student::factory()->create(['user_id' => $user->id ]);
+			
+		$count2 = DB::table('students')->count();
+			
+		$this->assertSame(1,$count2);
+			
+		$this->actingAs($user)->json('DELETE', 'api/v1/students/delete');       				
     
-	$count3 = DB::table('students')->count();
-		
-	$this->assertSame(0,$count3);      				
+		$count3 = DB::table('students')->count();
+			
+		$this->assertSame(0,$count3);      				
     }
 	
     public function can_create_course_rating(): void
     {							    		
         $user = User::factory()->create();
 		
-	$student = Student::factory()->create(['user_id' => $user->id ]);
+		$student = Student::factory()->create(['user_id' => $user->id ]);
 	
-	$course = Course::factory()->create();
+		$course = Course::factory()->create();
 				
-	$this->actingAs($user)->json('POST', 'api/v1/students/courses/rating', [
-				        'rating' => 5, 
-					'courseId' => $course->id  		 
-	]);	
+		$this->actingAs($user)->json('POST', 'api/v1/students/courses/rating', [
+			'rating' => 5, 
+			'courseId' => $course->id  		 
+		]);	
 		
-	$this->seeInDatabase('courses_ratings', [
-		'rating' => 5,
+		$this->seeInDatabase('courses_ratings', [
+			'rating' => 5,
 	        'course_id' =>  $course->id, 
-		'student_id' => $student->id,
-	]);
+			'student_id' => $student->id,
+		]);
      }
 }	
