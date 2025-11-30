@@ -15,14 +15,14 @@ return new class extends Migration
     public function up(): void
     {
          Schema::create('courses', function (Blueprint $table) {
-            $table->increments('id');
-	    $table->string('title',length:100)->unique();
-	    $table->enum('topic',['PHP','C++','Java']);
-	    $table->string('start_date');
-	    $table->integer('total_number_hours')->default(1);
-	    $table->foreignId('instructor_id')->constrained(table:'instructors')->onUpdate('cascade')->onDelete('cascade');
-	    $table->unique('title','topic');
-            $table->timestamps();
+        		$table->increments('id');
+	    		$table->string('title',length:100)->unique();
+	    		$table->enum('topic',['PHP','C++','Java']);
+	    		$table->string('start_date');
+	    		$table->integer('total_number_hours')->default(1);
+	    		$table->foreignId('instructor_id')->constrained(table:'instructors')->onUpdate('cascade')->onDelete('cascade');
+	    		$table->unique('title','topic');
+            	$table->timestamps();
         });
     }
 
@@ -36,3 +36,4 @@ return new class extends Migration
         Schema::dropIfExists('courses');
     }
 }
+
