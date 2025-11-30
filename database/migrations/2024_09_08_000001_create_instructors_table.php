@@ -14,17 +14,17 @@ return new class extends Migration
     public function up(): void
     {
          Schema::create('instructors', function (Blueprint $table) {
-             $table->increments('id');
-	     $table->enum('title',['Associate Professor', 'Teaching assistant','Professor','Adjunct professor',
+            $table->increments('id');
+	     	$table->enum('title',['Associate Professor', 'Teaching assistant','Professor','Adjunct professor',
 				   'Instructor','Clinical professor','Distinguished Professor','Professor Emeritus',
 				   'Professor of Practice','Research associate','Tenure track','Lecturer',
 				   'Visiting Assistant Professor']);
-	     $table->string('firstname',length:50);
-	     $table->string('lastname',length:50);
-	     $table->foreignId('user_id')->constrained(table: 'users')->onUpdate('cascade')->onDelete('cascade');
-	     $table->unique('firstname','lastname');
-	     $table->unique('user_id');
-             $table->timestamps();
+	     	$table->string('firstname',length:50);
+	     	$table->string('lastname',length:50);
+	     	$table->foreignId('user_id')->constrained(table: 'users')->onUpdate('cascade')->onDelete('cascade');
+	     	$table->unique('firstname','lastname');
+	     	$table->unique('user_id');
+            $table->timestamps();
         });
     }
 
@@ -38,3 +38,4 @@ return new class extends Migration
         Schema::dropIfExists('instructors');
     }
 }
+
