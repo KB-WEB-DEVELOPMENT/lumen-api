@@ -24,39 +24,39 @@ class InstructorController extends Controller
     {
         $this->validateProfile($request);
 		 
-	$user_id = Auth::id();
+	    $user_id = Auth::id();
 		
-	$instructor = Instructor::where('user_id',$user_id)->firstOrFail();
+	    $instructor = Instructor::where('user_id',$user_id)->firstOrFail();
 						
-	$instructor->fill($request->all());
+	    $instructor->fill($request->all());
  
-	$instructor->save();
+	    $instructor->save();
  
-	$data = $this->item($instructor, new InstructorTransformer());
+	    $data = $this->item($instructor, new InstructorTransformer());
  		
-	return response()->json($data,200);	
+	    return response()->json($data,200);	
     }
 
     public function deleteProfile()
     {
         $user_id = Auth::id();
 		
-	$instructor = Instructor::where('user_id',$user_id)->firstOrFail();
+	    $instructor = Instructor::where('user_id',$user_id)->firstOrFail();
 		
-	$instructor->delete();
+	    $instructor->delete();
 		
-	return response(null, 204);
+	    return response(null, 204);
     }
 
     public function createCourse(Request $request)
     {
         $this->validateCourse($request);
 		
-	$user_id = Auth::id();
+	    $user_id = Auth::id();
 		
-	$instructor = Instructor::where('user_id',$user_id)->firstOrFail();
+	    $instructor = Instructor::where('user_id',$user_id)->firstOrFail();
 		
-	$course = Course::create([
+	    $course = Course::create([
 			'title' => $request->input('title'),
 			'topic' => $request->input('topic'),
 			'start_date' => $request->input('start_date'),
@@ -64,60 +64,60 @@ class InstructorController extends Controller
 			'instructor_id' => $instructor->id,
 		]);
 		
-	$data = $this->item($course, new CourseTransformer());	
+	    $data = $this->item($course, new CourseTransformer());	
 
-	return response()->json($data, 201, [
-		'Location' => route('courses.show', ['courseId' => $course->id])
-	]);		
+	     return response()->json($data, 201, [
+			'Location' => route('courses.show', ['courseId' => $course->id])
+		]);		
     }
 
     public function updateCourse(Request $request, int $courseId)
     {
         $this->validateCourse($request);
 		
-	$user_id = Auth::id();
+		$user_id = Auth::id();
 		
-	$instructor = Instructor::where('user_id',$user_id)->firstOrFail();
+		$instructor = Instructor::where('user_id',$user_id)->firstOrFail();
 		
-	$course = Course::where('instructor_id',$instructor->id)->findOrFail($courseId);
+		$course = Course::where('instructor_id',$instructor->id)->findOrFail($courseId);
 						
-	$course->fill($request->all());
+		$course->fill($request->all());
  
-	$course->save();
+		$course->save();
  
-	$data = $this->item($course, new CourseTransformer());
+		$data = $this->item($course, new CourseTransformer());
  		
-	return response()->json($data,200);		
+		return response()->json($data,200);		
     }
 	
     public function deleteCourse(int $courseId)
     {
         $user_id = Auth::id();
 		
-	$instructor = Instructor::where('user_id',$user_id)->firstOrFail();
+		$instructor = Instructor::where('user_id',$user_id)->firstOrFail();
 		
-	$course = Course::where('instructor_id',$instructor->id)->findOrFail($courseId);
+		$course = Course::where('instructor_id',$instructor->id)->findOrFail($courseId);
 		
-	$course->delete();
+		$course->delete();
 		
-	return response(null, 204);		
+		return response(null, 204);		
     }
 	
     private function validateProfile(Request $request)
     {
         
-	$this->validate($request, [
+		$this->validate($request, [
             'title' => [
 			   'required',
 			    Rule::in([
-				'Associate Professor', 'Teaching assistant','Professor','Adjunct professor',
-				'Instructor','Clinical professor','Distinguished Professor','Professor Emeritus',
-				'Professor of Practice','Research associate','Tenure track','Lecturer',
-				'Visiting Assistant Professor',
+					'Associate Professor', 'Teaching assistant','Professor','Adjunct professor',
+					'Instructor','Clinical professor','Distinguished Professor','Professor Emeritus',
+					'Professor of Practice','Research associate','Tenure track','Lecturer',
+					'Visiting Assistant Professor',
 			    ]),
 			],
-	    'firstname' => 'required|string|min:1|max:50',
-	    'lastname' =>  'required|string|min:1|max:50',
+	    	'firstname' => 'required|string|min:1|max:50',
+	    	'lastname' =>  'required|string|min:1|max:50',
         ]); 	  	  
     }
 	
@@ -126,11 +126,11 @@ class InstructorController extends Controller
         $this->validate($request, [
             'title' => 'required|string|min:1|max:100',
             'topic' => [
-			'required',
-			 Rule::in(['PHP','C++','Java']),
-	     ],
-	     'start_date' => 'required|date_format:d-m-Y|after:today',
-	     'total_number_hours'  => 'required|integer|gte:1',
-	]);		  
+				'required',
+			 	Rule::in(['PHP','C++','Java']),
+	     	],
+	     	'start_date' => 'required|date_format:d-m-Y|after:today',
+	     	'total_number_hours'  => 'required|integer|gte:1',
+		]);		  
     }	
 }
