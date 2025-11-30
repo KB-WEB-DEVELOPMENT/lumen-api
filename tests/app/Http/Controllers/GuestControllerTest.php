@@ -31,30 +31,30 @@ class GuestControllerTest extends TestCase
     {		
         DB::table('instructors')->truncate();
 		
-	$count = DB::table('instructors')->count();
+		$count = DB::table('instructors')->count();
 		
-	$this->assertSame(0,$count);
+		$this->assertSame(0,$count);
 
-	Instructor::factory()->count(6)->create();	
+		Instructor::factory()->count(6)->create();	
 			
-	$response = $this->json('GET','api/v1/instructors');
+		$response = $this->json('GET','api/v1/instructors');
 		
-	$response->assertJsonCount(6,'id');
+		$response->assertJsonCount(6,'id');
      }
 	
     public function can_see_students(): void
     {		
         DB::table('students')->truncate();
 		
-	$count = DB::table('students')->count();
+		$count = DB::table('students')->count();
 		
-	$this->assertSame(0,$count);
+		$this->assertSame(0,$count);
 
-	Student::factory()->count(7)->create();	
+		Student::factory()->count(7)->create();	
 			
-	$response = $this->json('GET','api/v1/students');
+		$response = $this->json('GET','api/v1/students');
 		
-	$response->assertJsonCount(7,'id');
+		$response->assertJsonCount(7,'id');
      }
 	
     public function can_see_courses(): void
@@ -109,34 +109,34 @@ class GuestControllerTest extends TestCase
        $courseRating1 = CourseRating::factory()->create([
 					   'rating' => rand(1,5),
 					   'course_id' => $course1->id,
-					  'student_id' => $student1->id,
-			  ]);
+					   'student_id' => $student1->id,
+		]);
 		
-	$courseRating2 = CourseRating::factory()->create([
-	                                 'rating' => rand(1,5),
-					 'course_id' => $course1->id,
-					 'student_id' => $student2->id,
-			 ]);
+		$courseRating2 = CourseRating::factory()->create([
+	                'rating' => rand(1,5),
+					'course_id' => $course1->id,
+					'student_id' => $student2->id,
+		]);
 		
-	$courseRating3 = CourseRating::factory()->create([
+		$courseRating3 = CourseRating::factory()->create([
 					  'rating' => rand(1,5),
 					  'course_id' => $course2->id,
 					  'student_id' => $student1->id,
-		         ]);
+		]);
 		
-	$courseRating4 = CourseRating::factory()->create([
-			                 'rating' => rand(1,5),
-					 'course_id' => $course2->id,
-					 'student_id' => $student2->id,
-		         ]);
+		$courseRating4 = CourseRating::factory()->create([
+			        'rating' => rand(1,5),
+					'course_id' => $course2->id,
+					'student_id' => $student2->id,
+		]);
 
-	$response = $this->json('GET', 'api/v1/instructors/stats');
+		$response = $this->json('GET', 'api/v1/instructors/stats');
 		
 		$response->assertJsonCount(2,'name');
 	}
 	
 	public function can_see_single_instructor(): void
-        {		
+    {		
 	   $instructor = Instructor::factory()->create(['firstname' => 'Kâmi' ]);
 				
 	   $response = $this->json('GET', 'api/v1/instructors', ['instructorId' => $instructor->id ]);
@@ -145,7 +145,7 @@ class GuestControllerTest extends TestCase
 	}
 	
 	public function can_see_single_student(): void
-        {	
+	{	
 	   $student = Student::factory()->create(['firstname' => 'Kâmi' ]);
 				
 	   $response = $this->json('GET', 'api/v1/students', ['studentId' => $student->id ]);
@@ -154,21 +154,21 @@ class GuestControllerTest extends TestCase
 	}
 	
 	public function can_see_single_course(): void
-        {		
+    {		
 	     $instructor = Instructor::factory()->create();
 		
 	     $course = Course::factory()->create([
 		            'title' => 'Lumen Laravel 101 - Course',
-			     'instructor_id' => $instructor->id,		
-			]);
+			     	'instructor_id' => $instructor->id,		
+		]);
 		
-	     $response = $this->json('GET', 'api/v1/courses', ['courseId' => $course->id ]);
+	    $response = $this->json('GET', 'api/v1/courses', ['courseId' => $course->id ]);
 		
-	     $response->seeJson(['title' => 'Lumen Laravel 101 - Course' ]);	
+	    $response->seeJson(['title' => 'Lumen Laravel 101 - Course' ]);	
 	}
 	
 	public function can_see_single_instructor_stats(): void
-        {	
+    {	
 	    $user1 = User::factory()->create();
 	    $user2 = User::factory()->create();
 	    $user3 = User::factory()->create();
@@ -180,16 +180,16 @@ class GuestControllerTest extends TestCase
 	    $course = Course::factory()->create(['instructor_id' => $instructor->id ]);
 		
 	    $courseRating1 = CourseRating::factory()->create([
-		                 'rating' => 5,
-				 'course_id' => $course->id,
-				 'student_id' => $student1->id,
-			     ]);
+		    				'rating' => 5,
+				 			'course_id' => $course->id,
+				 			'student_id' => $student1->id,
+		]);
 											
 	    $courseRating2 = CourseRating::factory()->create([
 	                        'rating' => 3,
-				'course_id' => $course->id,
-				'student_id' => $student2->id,
-			    ]);
+							'course_id' => $course->id,
+							'student_id' => $student2->id,
+		]);
 													
 	    $response = $this->json('GET', 'api/v1/instructors/stats', ['instructorId' => $instructor->id ]);
 		
